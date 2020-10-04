@@ -59,7 +59,7 @@ export class ShopComponent implements OnInit {
   ngOnInit(): void {
     this.getShopSearchText$
       .pipe(first())
-      .subscribe(previousResearch => {
+    .subscribe(previousResearch => {
       if (previousResearch) {
         this.store.dispatch(search({ text: previousResearch }));
       }

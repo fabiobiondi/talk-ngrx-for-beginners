@@ -1,15 +1,22 @@
 import { Component } from '@angular/core';
 import { CartService } from '../../core/cart/cart.service';
+import { CartItem } from '../../model/cart';
 
 @Component({
   selector: 'app-cart',
   template: `
-    <!--No items in cart-->
-    <div class="alert alert-info" *ngIf="!cartService.items.length">
-      <div class="mb-3">There are no items in cart!</div>
-      <button class="btn btn-outline-primary" routerLink="shop">Go to shop</button>
+    <div class="list-group-item" *ngIf="cartService.items.length else empty">
+      Total order: € {{cartService.getTotalCart()}}
     </div>
-  
+
+    <!--No items in cart-->
+    <ng-template #empty>
+      <div class="alert alert-info">
+        <div class="mb-3">There are no items in cart!</div>
+        <button class="btn btn-outline-primary" routerLink="shop">Go to shop</button>
+      </div>
+    </ng-template>
+    
     <!--Cart List-->
     <div 
       class="media pt-5"
@@ -19,7 +26,7 @@ import { CartService } from '../../core/cart/cart.service';
       <div class="media-body">
         <h2 class="mt-0">{{cartItem.item.width}} x {{cartItem.item.height}}</h2>
         € {{cartItem.item | cartItemCost}}
-        <button class="btn btn-primary" (click)="cartService.removeFromCart(cartItem.item)">Remove</button>
+        <button class="btn btn-primary" (click)="removeFromCartHandler(cartItem)">Remove</button>
       </div>
     </div>
   `,
@@ -27,5 +34,10 @@ import { CartService } from '../../core/cart/cart.service';
 export class CartComponent {
 
   constructor(public cartService: CartService) { }
+
+
+  removeFromCartHandler(cartItem: CartItem): void {
+    this.cartService.removeFromCart(cartItem.item);
+  }
 
 }

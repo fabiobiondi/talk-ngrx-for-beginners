@@ -1,12 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CartService } from '../../core/cart/cart.service';
 import { ShopService } from './services/shop.service';
+import { Photo } from '../../model/pexel-response';
 
 @Component({
   selector: 'app-shop',
   template: `
     <!--Form: search photos-->
-    <form #f="ngForm" (ngSubmit)="shopService.searchImage(f.value.searchText)">
+    <form #f="ngForm" (ngSubmit)="searchHandler(f.value.searchText)">
       <div class="form-row align-items-center">
         <div class="col-auto">
           <input type="text" class="form-control mb-2" 
@@ -33,7 +34,7 @@ import { ShopService } from './services/shop.service';
               {{photo.width}} x {{photo.height}}
             </h5>
             <p class="card-text">Photo by <br/> <a [href]="photo.photographer_url">{{photo.photographer}}</a></p>
-            <button class="btn btn-primary btn-block" (click)="cartService.addToCart(photo)">
+            <button class="btn btn-primary btn-block" (click)="addToCartHandler(photo)">
               Add to Cart
               (€ {{photo | cartItemCost}})
             </button>
@@ -54,6 +55,13 @@ export class ShopComponent implements OnInit {
     if (previousResearch) {
       this.shopService.searchImage(previousResearch);
     }
+  }
+
+  addToCartHandler(item: Photo): void {
+    this.cartService.addToCart(item);
+  }
+  searchHandler(text: string): void {
+    this.shopService.searchImage(text);
   }
 }
 

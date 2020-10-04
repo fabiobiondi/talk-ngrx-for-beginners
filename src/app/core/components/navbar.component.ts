@@ -1,5 +1,8 @@
 import { Component, OnInit } from '@angular/core';
-import { CartService } from '../cart/cart.service';
+import { Observable } from 'rxjs';
+import { select, Store } from '@ngrx/store';
+import { AppState } from '../../app.module';
+import { getTotalCartFormatted } from '../cart/store/cart.selector';
 
 @Component({
   selector: 'app-navbar',
@@ -12,17 +15,15 @@ import { CartService } from '../cart/cart.service';
           routerLink="cart"
           style="cursor: pointer"
         >
-          € {{cartService.getTotalCart()}} ({{cartService.items.length}} products)
+         {{getTotalCartFormatted$ | async}})
         </span>
       </div>
     </nav>
   `,
 })
-export class NavbarComponent implements OnInit {
+export class NavbarComponent {
+  getTotalCartFormatted$: Observable<string> = this.store.pipe(select(getTotalCartFormatted));
 
-  constructor(public cartService: CartService) { }
-
-  ngOnInit(): void {
-  }
+  constructor(private store: Store<AppState>) { }
 
 }

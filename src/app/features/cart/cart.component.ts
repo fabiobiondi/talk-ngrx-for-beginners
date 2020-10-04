@@ -1,10 +1,9 @@
 import { Component } from '@angular/core';
-import { CartService } from '../../core/cart/cart.service';
 import { Observable } from 'rxjs';
-import { select, Store } from '@ngrx/store';
-import { getCart, getCartIsEmpty, getTotalCart, getTotalCartFormatted } from '../../core/cart/store/cart.selector';
 import { AppState } from '../../app.module';
 import { CartItem } from '../../model/cart';
+import { select, Store } from '@ngrx/store';
+import { getCart, getCartIsEmpty, getTotalCart } from '../../core/cart/store/cart.selector';
 import { removeFromCart } from '../../core/cart/store/cart.actions';
 
 @Component({

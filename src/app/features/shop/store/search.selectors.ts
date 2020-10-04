@@ -7,3 +7,8 @@ export const getSearchResult = createSelector(
   getShopState,
   state => state.search.items
 );
+
+export const getShopSearchText = createSelector(
+  getShopState,
+  state => state.search.text
+)

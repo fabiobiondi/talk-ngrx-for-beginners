@@ -1,14 +1,12 @@
 import { Component, OnInit } from '@angular/core';
-import { CartService } from '../../core/cart/cart.service';
-import { ShopService } from './services/shop.service';
 import { select, Store } from '@ngrx/store';
-import { AppState } from '../../app.module';
-import { addToCart } from '../../core/cart/store/cart.actions';
-import { Photo } from '../../model/pexel-response';
-import { search } from './store/search.actions';
 import { Observable } from 'rxjs';
-import { getSearchResult } from './store/search.selectors';
 import { ShopState } from './shop.module';
+import { Photo } from '../../model/pexel-response';
+import { getSearchResult, getShopSearchText } from './store/search.selectors';
+import { search } from './store/search.actions';
+import { addToCart } from '../../core/cart/store/cart.actions';
+import { first } from 'rxjs/operators';
 
 @Component({
   selector: 'app-shop',
@@ -19,7 +17,7 @@ import { ShopState } from './shop.module';
         <div class="col-auto">
           <input type="text" class="form-control mb-2" 
                  placeholder="Search Products" 
-                 [ngModel]="shopService.text"
+                 [ngModel]="getShopSearchText$ | async"
                  name="searchText"
           >
         </div>
@@ -52,19 +50,20 @@ import { ShopState } from './shop.module';
 })
 export class ShopComponent implements OnInit {
   items$: Observable<Photo[]> = this.store.pipe(select(getSearchResult));
+  getShopSearchText$: Observable<string> = this.store.pipe(select(getShopSearchText));
 
   constructor(
-    public shopService: ShopService,
     public store: Store<ShopState>
   ) { }
 
   ngOnInit(): void {
-    // load previous research
-    const previousResearch = this.shopService.text;
-    if (previousResearch) {
-      // this.shopService.searchImage(previousResearch);
-      this.store.dispatch(search({ text: previousResearch }));
-    }
+    this.getShopSearchText$
+      .pipe(first())
+      .subscribe(previousResearch => {
+      if (previousResearch) {
+        this.store.dispatch(search({ text: previousResearch }));
+      }
+    });
   }
 
   addToCartHandler(item: Photo): void {
@@ -72,7 +71,6 @@ export class ShopComponent implements OnInit {
   }
 
   searchHandler(text: string): void {
-    // shopService.searchImage(f.value.searchText)
     this.store.dispatch(search({ text }));
   }
 }

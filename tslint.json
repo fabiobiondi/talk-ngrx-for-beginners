@@ -4,6 +4,7 @@
     "codelyzer"
   ],
   "rules": {
+    "no-trailing-whitespace": false,
     "align": {
       "options": [
         "parameters",
@@ -139,13 +140,13 @@
     "directive-selector": [
       true,
       "attribute",
-      "ds",
+      "app",
       "camelCase"
     ],
     "component-selector": [
       true,
       "element",
-      "ds",
+      "app",
       "kebab-case"
     ]
   }

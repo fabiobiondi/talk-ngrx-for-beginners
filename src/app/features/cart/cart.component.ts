@@ -24,7 +24,7 @@ import { CartItem } from '../../model/cart';
     >
       <img [src]="cartItem.item.src.tiny" class="mr-3" alt="item">
       <div class="media-body">
-        <h2 class="mt-0">{{cartItem.item.width}} x {{cartItem.item.height}}</h2>
+        <h4 class="mt-0">{{cartItem.item.width}} x {{cartItem.item.height}}</h4>
         € {{cartItem.item | cartItemCost}}
         <button class="btn btn-primary" (click)="removeFromCartHandler(cartItem)">Remove</button>
       </div>
@@ -35,7 +35,7 @@ export class CartComponent {
 
   constructor(public cartService: CartService) { }
 
-
+  // remove from cart
   removeFromCartHandler(cartItem: CartItem): void {
     this.cartService.removeFromCart(cartItem.item);
   }

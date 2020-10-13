@@ -10,10 +10,11 @@ import { Photo } from '../../model/pexel-response';
     <form #f="ngForm" (ngSubmit)="searchHandler(f.value.searchText)">
       <div class="form-row align-items-center">
         <div class="col-auto">
-          <input type="text" class="form-control mb-2" 
-                 placeholder="Search Products" 
-                 [ngModel]="shopService.text"
-                 name="searchText"
+          <input 
+            type="text" class="form-control mb-2" 
+            placeholder="Search Products" 
+            [ngModel]="shopService.text"
+            name="searchText"
           >
         </div>
         <div class="col-auto">
@@ -49,19 +50,23 @@ export class ShopComponent implements OnInit {
     public shopService: ShopService
   ) { }
 
+  // load previous research
   ngOnInit(): void {
-    // load previous research
     const previousResearch = this.shopService.text;
     if (previousResearch) {
       this.shopService.searchImage(previousResearch);
     }
   }
 
-  addToCartHandler(item: Photo): void {
-    this.cartService.addToCart(item);
-  }
+  // search images
   searchHandler(text: string): void {
     this.shopService.searchImage(text);
   }
+
+  // add to carts
+  addToCartHandler(item: Photo): void {
+    this.cartService.addToCart(item);
+  }
+
 }
 

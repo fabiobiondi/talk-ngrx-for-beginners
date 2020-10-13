@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
-import { PexelResponse } from '../../../model/pexel-response';
 import { Injectable } from '@angular/core';
+import { PexelResponse } from '../../../model/pexel-response';
 
 @Injectable({ providedIn: 'root'})
 export class ShopService {

@@ -10,9 +10,9 @@ import { Photo } from '../../model/pexel-response';
     <form #f="ngForm" (ngSubmit)="searchHandler(f.value.searchText)">
       <div class="form-row align-items-center">
         <div class="col-auto">
-          <input 
-            type="text" class="form-control mb-2" 
-            placeholder="Search Products" 
+          <input
+            type="text" class="form-control mb-2"
+            placeholder="Search Products"
             [ngModel]="shopService.text"
             name="searchText"
           >
@@ -25,22 +25,22 @@ import { Photo } from '../../model/pexel-response';
 
     <!--List: Photo result-->
     <div class="d-flex flex-wrap">
-        <div 
-          class="p-2 m-2 bd-highlight card" style="width: 45%" 
-          *ngFor="let photo of shopService.list?.photos"
-        >
-          <img [src]="photo.src.landscape" class="card-img-top" [alt]="'Photo by ' + photo.photographer">
-          <div class="card-body">
-            <h5 class="card-title">
-              {{photo.width}} x {{photo.height}}
-            </h5>
-            <p class="card-text">Photo by <br/> <a [href]="photo.photographer_url">{{photo.photographer}}</a></p>
-            <button class="btn btn-outline-primary btn-block" (click)="addToCartHandler(photo)">
-              Add to Cart
-              (€ {{photo | cartItemCost}})
-            </button>
-          </div>
+      <div
+        class="p-2 m-2 bd-highlight card" style="width: 45%"
+        *ngFor="let photo of shopService.response?.photos"
+      >
+        <img [src]="photo.src.landscape" class="card-img-top" [alt]="'Photo by ' + photo.photographer">
+        <div class="card-body">
+          <h5 class="card-title">
+            {{photo.width}} x {{photo.height}}
+          </h5>
+          <p class="card-text">Photo by <br/> <a [href]="photo.photographer_url">{{photo.photographer}}</a></p>
+          <button class="btn btn-outline-primary btn-block" (click)="addToCartHandler(photo)">
+            Add to Cart
+            (€ {{photo | cartItemCost}})
+          </button>
         </div>
+      </div>
     </div>
   `,
 })

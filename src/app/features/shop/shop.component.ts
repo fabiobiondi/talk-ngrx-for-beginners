@@ -25,7 +25,7 @@ import { Photo } from '../../model/pexel-response';
     <!--List: Photo result-->
     <div class="d-flex flex-wrap">
         <div 
-          class="p-2 bd-highlight card" style="width: 18rem;" 
+          class="p-2 m-2 bd-highlight card" style="width: 45%" 
           *ngFor="let photo of shopService.list?.photos"
         >
           <img [src]="photo.src.landscape" class="card-img-top" [alt]="'Photo by ' + photo.photographer">
@@ -34,7 +34,7 @@ import { Photo } from '../../model/pexel-response';
               {{photo.width}} x {{photo.height}}
             </h5>
             <p class="card-text">Photo by <br/> <a [href]="photo.photographer_url">{{photo.photographer}}</a></p>
-            <button class="btn btn-primary btn-block" (click)="addToCartHandler(photo)">
+            <button class="btn btn-outline-primary btn-block" (click)="addToCartHandler(photo)">
               Add to Cart
               (€ {{photo | cartItemCost}})
             </button>

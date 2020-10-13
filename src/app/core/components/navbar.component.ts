@@ -4,7 +4,7 @@ import { CartService } from '../cart/cart.service';
 @Component({
   selector: 'app-navbar',
   template: `
-    <nav class="navbar navbar-light bg-light">
+    <nav class="navbar navbar-light bg-light sticky-top">
       <a class="navbar-brand" routerLink="shop">My NGRX Cart</a>
       <div>
         <span

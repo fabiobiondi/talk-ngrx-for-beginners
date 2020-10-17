@@ -5,16 +5,16 @@ import { CartItem } from '../../model/cart';
 @Component({
   selector: 'app-cart',
   template: `
-    <div class="list-group-item" *ngIf="cartService.items.length else empty">
-      Total order: € {{cartService.getTotalCart()}}
-    </div>
-
-    <!--No items in cart-->
-    <ng-template #empty>
+    <div class="list-group-item" *ngIf="!cartService.items.length else totalOrder">
       <div class="alert alert-info">
         <div class="mb-3">There are no items in cart!</div>
         <button class="btn btn-outline-primary" routerLink="shop">Go to shop</button>
       </div>
+    </div>
+
+    <!--No items in cart-->
+    <ng-template #totalOrder>
+      Total order: € {{cartService.getTotalCart()}}
     </ng-template>
     
     <!--Cart List-->

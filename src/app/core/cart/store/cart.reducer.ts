@@ -7,17 +7,15 @@ export const cartReducer = createReducer(
   [] as CartItem[],
   on(addToCart, (state, action) => {
     const found = state.some(item => item.item.id === action.item.id);
-    // Add to Cart
+    // Avoid adding the same item
     if (!found) {
-      // Avoid adding the same item
-      return [...state, {
+      const newItem = {
         item: action.item,
         cost: new CartItemCostPipe().transform(action.item)
-      }];
+      };
+      return [...state, newItem];
     }
     return state;
   }),
-  on(removeFromCart, (state, action) => {
-    return state.filter(p => p.item.id !== action.item.id);
-  })
+  on(removeFromCart, (state, action) => state.filter(p => p.item.id !== action.item.id))
 );

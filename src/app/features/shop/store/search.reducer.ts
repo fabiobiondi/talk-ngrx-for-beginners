@@ -14,16 +14,6 @@ export const INITIALIZE_STATE: SearchState = {
 
 export const searchReducer = createReducer(
   INITIALIZE_STATE,
-  on(search, (state, action) => {
-    return {
-      ...state,
-      text: action.text,
-    };
-  }),
-  on(searchSuccess, (state, action) => {
-    return {
-      ...state,
-      items: [...action.response.photos],
-    };
-  })
+  on(search, (state, action) =>  ({ ...state, text: action.text, })),
+  on(searchSuccess, (state, action) => ({ ...state, items: [...action.response.photos] }))
 );

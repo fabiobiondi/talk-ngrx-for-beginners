@@ -6,7 +6,7 @@ import { createSelector } from '@ngrx/store';
 export const getCart = (state: AppState): CartItem[] => state.cart;
 
 // is cart empty?
-export const getCartIsEmpty = (state: AppState): boolean => !!state.cart.length;
+export const getCartIsEmpty = (state: AppState) => !state.cart.length;
 
 // cart total cost
 export const getTotalCart = (state: AppState): number => {

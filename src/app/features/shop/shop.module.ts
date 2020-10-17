@@ -1,14 +1,14 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ActionReducerMap, StoreModule } from '@ngrx/store';
-
-import { ShopRoutingModule } from './shop-routing.module';
-import { ShopComponent } from './shop.component';
 import { FormsModule } from '@angular/forms';
-import { SharedModule } from '../../shared/shared.module';
-import { searchReducer, SearchState } from './store/search.reducer';
+import { ActionReducerMap, StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
+import { ShopRoutingModule } from './shop-routing.module';
+import { SharedModule } from '../../shared/shared.module';
+
+import { ShopComponent } from './shop.component';
 import { SearchEffects } from './store/search.effects';
+import { searchReducer, SearchState } from './store/search.reducer';
 
 export interface ShopState {
   search: SearchState;
